@@ -54,10 +54,9 @@ class Reviews:
     def _compare_value_of_review(self, model):
         """Informacja z ML na temat punktacji."""
         predict = model.predict(self._new_review)
-        print(f'\n\n{predict}\n\n')
-        if predict < 0.25 and self._new_stars > 3:
+        if predict < 0 and self._new_stars > 3:
             print(f'Uwaga: Przyznano ponad 3 gwiazdki a opinia wygląda na negatywną.')
-        elif predict > 0.75 and self._new_stars < 3:
+        elif predict > 0 and self._new_stars < 3:
             print(f'Uwaga: Przyznano mniej niż 3 gwiazdki a opinia wygląda na pozytywną.')
         
     def _user_wants_to_add_review(self):
