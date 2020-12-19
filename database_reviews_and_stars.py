@@ -25,7 +25,7 @@ class DatabaseReviewsAndStars(Database):
         """Dodaje do bazy wartości. Zwraca True gdy operacja się powiedzie."""
         time_stamp = int(datetime.now(tz=timezone.utc).timestamp())
         new_review_string = (str(userid) + ',' + str(movieid) 
-            + ',' + str(value) + ',' + str(time_stamp))
+            + ',' + str(value) + ',' + str(time_stamp)) + '\n'
         try:
             with open(self._full_database_path, mode='a') as database_reviews:
                 database_reviews.writelines(new_review_string) 

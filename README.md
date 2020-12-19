@@ -5,7 +5,7 @@ Program sprawdzi czy treść jest powiązana z oceną i poinformuje o wyniku uż
 Np: Jeżeli opinia będzie brzmieć "Very good film" a ocena będzie wynosić '1', to użytkownik zostanie ostrzeżony, że prawdopodobnie pomylił się przy wstawianiu ilości wiazdek.
 
 ## Lista zadań do wykonania:
-[ ] Naprawienie zapisywania nowych recenzji
+[X] Naprawienie zapisywania nowych recenzji
 [ ] Usuwanie swoich recenzji z bazy
 [ ] Poprawienie predykcji ML
 [ ] Szczegółowe informacje o filmie
