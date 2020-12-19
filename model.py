@@ -17,6 +17,7 @@ class Model:
     def __init__(self):
         """Przygotowanie modelu ML."""
         model = keras.models.load_model(settings.model_dir)
+        
         max_features = 10000
         sequence_length = 250
         vectorize_layer = TextVectorization(
@@ -24,6 +25,7 @@ class Model:
             max_tokens=max_features,
             output_mode='int',
             output_sequence_length=sequence_length)
+
         self.model = tf.keras.Sequential([
             vectorize_layer,
             model,
