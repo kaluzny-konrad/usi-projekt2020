@@ -107,8 +107,24 @@ class Reviews:
         databaseR = DatabaseReviews()
         databaseR.remove(self._userid, self._movieid)
 
+    def _remove_added_stars(self):
+        databaseS = DatabaseStars()
+        databaseS.remove(self._userid, self._movieid)
+
     def get_review(self):
         """Zwraca recenzję użytkownika do filmu."""
         self._get_rev_and_stars()
         print(f'\nTwoja recenzja: {self._review}')
         print(f'Przyznana ilość gwiazdek: {self._stars}\n')
+
+    def drop(self):
+        """Usuwa recencję użytkownika do filmu."""
+        if self.review_exists() == True:
+            self._drop_review_and_stars_from_base()
+        else:
+            print("Brak opinii do tego filmu.")
+
+    def _drop_review_and_stars_from_base(self):
+        """Usuwanie recenzji i gwiazdek z bazy."""
+        self._remove_added_review()
+        self._remove_added_stars()

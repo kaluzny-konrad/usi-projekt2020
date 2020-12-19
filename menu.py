@@ -75,8 +75,13 @@ class Menu:
         self.revs = Reviews(self.user, self.movie)
         if self.revs.review_exists():
             self.revs.get_review()
+            choice = input("Chcesz usunąć opinię? [t]ak/[n]ie: ")
+            if choice == 'n' or choice == 'N':
+                pass
+            elif choice == 't' or choice == 'T':
+                self.revs.drop()
         else:
-            choice = input("chcesz dodać opinię? [t]ak/[n]ie:")
+            choice = input("Chcesz dodać opinię? [t]ak/[n]ie: ")
             if choice == 'n' or choice == 'N':
                 pass
             elif choice == 't' or choice == 'T':

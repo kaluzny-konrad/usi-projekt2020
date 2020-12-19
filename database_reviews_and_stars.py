@@ -1,6 +1,7 @@
 """Obsługa bazy punktów i recenzji."""
 from database import Database
 from datetime import timezone, datetime
+import csv
 
 class DatabaseReviewsAndStars(Database):
     """Obsługa bazy recenzji i gwiazdek."""
@@ -36,5 +37,43 @@ class DatabaseReviewsAndStars(Database):
         return True
 
     def remove(self, userid, movieid):
-        """Usuwa wartość z bazy."""
-        pass
+        """Usuwa wartość z bazy, zwraca True jeżeli operacja się udała."""
+        row_to_drop = self._row_of_review(userid, movieid)
+        if row_to_drop == False:
+            return False
+            
+        lines = list()
+        try:
+            with open(self._full_database_path, mode='r') as database_reviews:
+                reader = csv.reader(database_reviews)
+                for row in reader:
+                    lines.append(row)
+                    if row == row_to_drop:
+                        lines.remove(row)
+
+            with open(self._full_database_path, mode='w') as database_reviews:
+                writer = csv.writer(database_reviews)
+                writer.writerows(lines)
+
+        except FileNotFoundError:
+            return False
+        except ValueError:
+            return False
+        return True
+
+    def _row_of_review(self, userid, movieid):
+        """Zwraca przygotowany wiersz dla określonego userid, movieid."""
+        if self._get_database():
+            try:
+                review = self._database.loc[
+                    self._database['userId'] == userid].loc[
+                    self._database['movieId'] == movieid]
+            except IndexError:
+                return False
+
+        prepared_row = []
+        for row in review.values:
+            for value in row:
+                prepared_row.append(str(value))
+        
+        return prepared_row

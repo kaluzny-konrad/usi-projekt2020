@@ -6,7 +6,7 @@ Np: Jeżeli opinia będzie brzmieć "Very good film" a ocena będzie wynosić '1
 
 ## Lista zadań do wykonania:
 [X] Naprawienie zapisywania nowych recenzji
-[ ] Usuwanie swoich recenzji z bazy
+[X] Usuwanie swoich recenzji z bazy
 [ ] Poprawienie predykcji ML
 [ ] Szczegółowe informacje o filmie
 [ ] Tworzenie nowego konta
