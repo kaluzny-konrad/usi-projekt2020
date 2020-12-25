@@ -1,6 +1,7 @@
 from database_movies import DatabaseMovies
 import clear_terminal
-
+from imdb import IMDb
+from database_links import DatabaseLinks
 class Movies:
     def __init__(self):
         """Inicjowanie wartości domyślnych."""
@@ -38,12 +39,30 @@ class Movies:
         if self._movie_selected == True:
             clear_terminal.clear()
             print(self.get_title())
+            self.show_movie_info()
 
     def get_title(self):
         """Zwraca tytuł wybranego filmu."""
         if self._movie_selected == True:
             movies = DatabaseMovies()
             return movies.get_title_from_id(self._movieid)
+
+    def show_movie_info(self):
+        """Wyświetla listę informacji o filmie."""
+        movie_links = DatabaseLinks()
+        real_imdb_id = movie_links.get_real_id(self._movieid)
+        imdb_connect = IMDb()
+        movie_info = imdb_connect.get_movie(real_imdb_id)
+        
+        if movie_info['plot'][0] != None:
+            print('Fabuła:', movie_info['plot'][0])
+
+        print('Reżyserzy:')
+        for director in movie_info['directors']:
+            print(director['name'])
+
+        print('Gatunek:',movie_info['genres'][0])
+        print()
 
     def get_movieid(self):
         """Zwraca id wybranego filmu."""

@@ -8,7 +8,7 @@ Np: Jeżeli opinia będzie brzmieć "Very good movie" a ocena będzie wynosić '
 [X] Naprawienie zapisywania nowych recenzji
 [X] Usuwanie swoich recenzji z bazy
 [X] Poprawienie predykcji ML
-[ ] Szczegółowe informacje o filmie
+[X] Szczegółowe informacje o filmie
 [ ] Tworzenie nowego konta
 [ ] Wykorzystanie głównej bazy
 [ ] Krótsza lista filmów
