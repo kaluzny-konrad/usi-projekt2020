@@ -42,5 +42,34 @@ class DatabaseUsers(Database):
 
     def get_id_from_username(self, username):
         if self._get_database():
-            return self._database.loc[self._database['login'] 
-                == username]['userId'].values[0]
+            try:
+                userid = self._database.loc[self._database['login'] 
+                    == username]['userId'].values[0]
+            except IndexError:
+                return False
+            return userid
+
+    def add_new(self, username, password):
+        """Tworzy nowe konto użytkownika wg loginu i hasła."""
+        userid_int = self._get_last_id()
+        userid = self._build_userid_from_int(userid_int+1)
+        new_string = (str(userid) + ',' + str(username) 
+            + ',' + str(password) + '\n')
+        try:
+            with open(self._full_database_path, mode='a') as database:
+                database.writelines(new_string) 
+        except FileNotFoundError:
+            return False
+        except ValueError:
+            return False
+        return True
+
+    def _get_last_id(self):
+        """Zwraca ostatnie userid w postaci INTa."""
+        return self._database.loc[self._base_size()-1].values[0]
+    
+    def _build_userid_from_int(self, userid_int):
+        """Zamienia INT na poprawny format userid."""
+        lenght_of_zeros = 5-len(str(userid_int))
+        zeros = '0' * lenght_of_zeros
+        return zeros + str(userid_int)

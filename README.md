@@ -9,9 +9,9 @@ Np: Jeżeli opinia będzie brzmieć "Very good movie" a ocena będzie wynosić '
 [X] Usuwanie swoich recenzji z bazy
 [X] Poprawienie predykcji ML
 [X] Szczegółowe informacje o filmie
-[ ] Tworzenie nowego konta
+[x] Tworzenie nowego konta
+[ ] Lista filmów z maksymalną długością
 [ ] Wykorzystanie głównej bazy
-[ ] Krótsza lista filmów
 [ ] Przeglądanie listy zrecenzowanych filmów (tylko dla zalogowanych)
 [ ] Lista 3 ostatnich recenzji na temat filmu z bazy CSV
 [ ] Edytowanie swojej recenzji z bazy
