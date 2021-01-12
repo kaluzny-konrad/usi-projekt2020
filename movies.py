@@ -7,12 +7,12 @@ class Movies:
         """Inicjowanie wartości domyślnych."""
         self._movie_selected = False
 
-    def show_list(self):
+    def show_list_range(self, first_row, last_row):
         """Drukuje listę filmów z bazy."""
         movies = DatabaseMovies()
         clear_terminal.clear()
         print("## Lista filmów ##\n")
-        movies.show_list()
+        movies.show_list_range(first_row, last_row)
 
     def choose(self, movieid):
         """Pozwala wybrać użytkownikowi film z listy. True: film wybrany. False: powrót."""
@@ -68,3 +68,8 @@ class Movies:
         """Zwraca id wybranego filmu."""
         if self._movie_selected == True:
            return self._movieid
+
+    def base_size(self):
+        movies = DatabaseMovies()
+        movies._get_database()
+        return movies.base_size()

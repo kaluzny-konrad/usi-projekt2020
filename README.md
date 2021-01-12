@@ -10,8 +10,6 @@ Np: Jeżeli opinia będzie brzmieć "Very good movie" a ocena będzie wynosić '
 [X] Poprawienie predykcji ML
 [X] Szczegółowe informacje o filmie
 [x] Tworzenie nowego konta
-[ ] Lista filmów z maksymalną długością
-[ ] Wykorzystanie głównej bazy
-[ ] Przeglądanie listy zrecenzowanych filmów (tylko dla zalogowanych)
-[ ] Lista 3 ostatnich recenzji na temat filmu z bazy CSV
-[ ] Edytowanie swojej recenzji z bazy
+[X] Lista filmów z maksymalną długością
+[X] Wykorzystanie głównej bazy
+[ ] Naprawić wyświetlanie filmów, przy niezalogowanym userze

@@ -8,7 +8,16 @@ class DatabaseMovies(Database):
         """Inicjowanie wartości domyślnych bazy."""
         Database.__init__(self, 'movies.csv', ['movieId', 'title'])
 
-    def show_list(self):
+    def show_list_range(self, first_row, last_row):
+        """Wyświetla listę filmów z podanego zakresu wg miejsca w bazie."""
+        if self._get_database():
+            for row in range(first_row, last_row):
+                print(self._get_id_from_rownum(row), 
+                    ' - ', self._get_title_from_rownum(row))
+        else:
+            print("Baza nie odpowiada, spróbuj później!")
+
+    def show_full_list(self):
         """Wyświetl listę wszystkich filmów z bazy."""
         if self._get_database():
             for row in range(self._base_size()):
@@ -16,6 +25,10 @@ class DatabaseMovies(Database):
                     ' - ', self._get_title_from_rownum(row))
         else:
             print("Baza nie odpowiada, spróbuj później!")
+    
+    def base_size(self):
+        """Zwaraca wielkość bazy."""
+        return self._base_size()
 
     def _get_title_from_rownum(self, value):
         """Zwraca tytuł filmu dla określonego miejsca w bazie."""

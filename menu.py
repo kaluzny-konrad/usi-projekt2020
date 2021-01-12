@@ -4,15 +4,16 @@ from user import User
 from movies import Movies
 from database_reviews import DatabaseReviews
 from reviews import Reviews
+import settings
 
 class Menu:
     """Klasa obsługująca działania użytkownika."""
 
-    def __init__(self, model):
+    def __init__(self):#, model): - BLOKADA MODELU
         """Inicjalizacja menu głównego."""
         self.user = User()
         self.movie = Movies()
-        self.model = model
+        #self.model = model - BLOKADA MODELU
         self.choices = {
             "1": self.login_logout,
             "2": self.film_list,
@@ -53,23 +54,43 @@ class Menu:
             self.user.login()
 
     def film_list(self):
-        self.movie.show_list()
-        text_info = '\nWpisz ID filmu lub [p]owróć do Menu głównego: '
-        movieid = input(text_info)
-        if movieid == 'p' or movieid == 'P':
-            pass
-        elif self.movie.choose(movieid):
-            stay_on_site = 'stay'
-            while stay_on_site != 'p':
+        rows_in_list = settings.rows_in_list_movies
+        first_row = 0
+        last_row = first_row + rows_in_list
+        base_size = self.movie.base_size()
+        
+        while True:
+            self.movie.show_list_range(first_row, last_row)
+            text_info = '\nWpisz ID filmu, przejdź do [n]astępnej lub p[o]przedniej strony lub [p]owróć do Menu głównego: '
+            movieid = input(text_info)
+            if movieid == 'p' or movieid == 'P':
+                break
+            elif  movieid == 'n' or movieid == 'N':
+                if last_row + rows_in_list < base_size:
+                    first_row = first_row + rows_in_list
+                    last_row = last_row + rows_in_list
+                else:
+                    last_row = base_size
+                    first_row = last_row - rows_in_list
+            elif  movieid == 'o' or movieid == 'O':
+                if first_row >= rows_in_list:
+                    first_row = first_row - rows_in_list
+                    last_row = last_row - rows_in_list
+                else:
+                    first_row = 0
+                    last_row = first_row + rows_in_list
+            elif self.movie.choose(movieid):
                 self.movie.show_choosen_movie()
                 if self.user._is_logged == True:
                     self.user_review()
-                stay_on_site = input('[p]owróć do listy filmów: ')
-            self.movie._movie_selected = False
-            self.film_list()
-        else:
-            clear_terminal.clear(2)
-            self.film_list()
+                else:
+                    ### NAPRAWA: TUTAJ MUSI BYĆ COŚ, CO ZATRZYMA PROGRAM
+                    ### NA CZAS REAKCJI USERA.
+                    pass
+                self.movie._movie_selected = False
+            else:
+                print('\nPodano błędną informację.')
+                clear_terminal.clear(2)
 
     def user_review(self):
         self.revs = Reviews(self.user, self.movie)
@@ -85,4 +106,4 @@ class Menu:
             if choice == 'n' or choice == 'N':
                 pass
             elif choice == 't' or choice == 'T':
-                self.revs.add(self.model)
+                self.revs.add()#self.model) - BLOKADA MODELU
