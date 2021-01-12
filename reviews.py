@@ -51,7 +51,7 @@ class Reviews:
             print("\nNależy podać liczbę od 1 do 5!")
             self._get_new_stars()
 
-    def _compare_value_of_review(self):
+    def _compare_value_of_review(self, model):
         """Informacja z ML na temat punktacji."""
         predict = model.predict(self._new_review)
         if predict < 0 and self._new_stars > 3:
