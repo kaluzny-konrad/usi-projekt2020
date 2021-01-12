@@ -12,4 +12,5 @@ Np: Jeżeli opinia będzie brzmieć "Very good movie" a ocena będzie wynosić '
 [x] Tworzenie nowego konta
 [X] Lista filmów z maksymalną długością
 [X] Wykorzystanie głównej bazy
-[ ] Naprawić wyświetlanie filmów, przy niezalogowanym userze
+[X] Naprawić wyświetlanie filmów, przy niezalogowanym userze
+[X] Aktywować funkcję predykcji

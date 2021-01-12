@@ -10,14 +10,14 @@ class Reviews:
         self._userid = user.get_userid()
         self._movieid = movie.get_movieid()
     
-    def add(self):#, model): - BLOKADA MODELU
+    def add(self, model):
         """Dodawanie opinii i punktów do filmu."""
         if self.review_exists() == True:
             print("Opinia jest już dodana do tego filmu.")
         else:
             self._get_new_review()
             self._get_new_stars()
-            #self._compare_value_of_review(model) - BLOKADA MODELU
+            self._compare_value_of_review(model)
             if self._user_wants_to_add_review():
                 self._add_review_and_stars_to_base()
 
@@ -51,13 +51,13 @@ class Reviews:
             print("\nNależy podać liczbę od 1 do 5!")
             self._get_new_stars()
 
-    #def _compare_value_of_review(self): - BLOKADA MODELU
-    #    """Informacja z ML na temat punktacji.""" - BLOKADA MODELU
-    #    predict = model.predict(self._new_review) - BLOKADA MODELU
-    #    if predict < 0 and self._new_stars > 3: - BLOKADA MODELU
-    #        print(f'Uwaga: Przyznano ponad 3 gwiazdki a opinia wygląda na negatywną.') - BLOKADA MODELU
-    #    elif predict > 0 and self._new_stars < 3: - BLOKADA MODELU
-    #        print(f'Uwaga: Przyznano mniej niż 3 gwiazdki a opinia wygląda na pozytywną.') - BLOKADA MODELU
+    def _compare_value_of_review(self):
+        """Informacja z ML na temat punktacji."""
+        predict = model.predict(self._new_review)
+        if predict < 0 and self._new_stars > 3:
+            print(f'Uwaga: Przyznano ponad 3 gwiazdki a opinia wygląda na negatywną.')
+        elif predict > 0 and self._new_stars < 3:
+            print(f'Uwaga: Przyznano mniej niż 3 gwiazdki a opinia wygląda na pozytywną.')
         
     def _user_wants_to_add_review(self):
         """Decyzja czy dodać opinię."""
