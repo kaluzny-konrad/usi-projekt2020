@@ -62,7 +62,7 @@ class DatabaseReviewsAndStars(Database):
         return True
 
     def _row_of_review(self, userid, movieid):
-        """Zwraca przygotowany wiersz dla określonego userid, movieid."""
+        """Zwraca przygotowany wiersz dla określonego userid, movieid. W przypadku błędu zwraca False"""
         if self._get_database():
             try:
                 review = self._database.loc[
@@ -70,10 +70,10 @@ class DatabaseReviewsAndStars(Database):
                     self._database['movieId'] == movieid]
             except IndexError:
                 return False
-
-        prepared_row = []
-        for row in review.values:
-            for value in row:
-                prepared_row.append(str(value))
-        
-        return prepared_row
+            finally:
+                prepared_row = []
+                for row in review.values:
+                    for value in row:
+                        prepared_row.append(str(value))
+                return prepared_row
+        return False

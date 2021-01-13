@@ -55,13 +55,13 @@ class User:
             self._userid = None
 
     def get_username(self):
+        """Zwraca nazwę użytkownika z klasy."""
         return self._username
 
     def get_userid(self):
         """Zwraca userid zalogowanego użytkownika."""
         if self._is_logged == True:
             return self._userid
-
 
     def create_new_account(self):
         """Tworzy nowe konto wg danych podanych przez użytkownika."""

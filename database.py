@@ -3,14 +3,17 @@ import pandas as pd
 import settings
 
 class Database:
+    """Klasa nadrzędna obsługująca wszystkie bazy plików."""
+
     def __init__(self, database_name, database_columns):
+        """Inicjalizacja lokalizacji i kolumn bazy danych."""
         self._path_database = Path(settings.database_dir)
         self._database_name = database_name
         self._full_database_path = self._path_database/self._database_name
         self._database_columns = database_columns
     
     def _get_database(self):
-        """Pobiera bazę w formacie Pandas i zwraca True gdy operacja udana."""
+        """Pobiera bazę w formacie Pandas. Zwraca True gdy operacja udana."""
         try:
             self._database = pd.read_csv(
                     self._full_database_path, sep=',',

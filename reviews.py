@@ -72,35 +72,25 @@ class Reviews:
             return self._user_wants_to_add_review()
 
     def _add_review_and_stars_to_base(self):
-        """Dodanie recenzji i gwiazdek do bazy."""
+        """Dodanie recenzji i gwiazdek do bazy. Jeżeli baza gwiazdek nie odpowiada usuń recenzję."""
         if self._add_review_to_base():
             if self._add_stars_to_base():
-                self._review_added()
+                print('Recenzja została poprawnie dodana do bazy.')
             else:
                 self._remove_added_review()
-                self._review_not_added()
+                print('Baza nie odpowiada, spróbuj później.')
+        else:
+            print('Baza nie odpowiada, spróbuj później.')
 
     def _add_review_to_base(self):
-        """Dodanie recenzji filmowi z obsługą błędów."""
+        """Dodanie recenzji filmowi. Zwraca True jeżeli operacja się powiedzie."""
         databaseR = DatabaseReviews()
-        if databaseR.add_new(self._userid, self._movieid, self._new_review):
-            return True
-        else:
-            return False
+        return databaseR.add_new(self._userid, self._movieid, self._new_review)
 
     def _add_stars_to_base(self):
-        """Dodanie przyznanych gwiazdek filmowi z obsługą błędów."""
+        """Dodanie przyznanych gwiazdek filmowi. Zwraca True jeżeli operacja się powiedzie."""
         databaseS = DatabaseStars()
-        if databaseS.add_new(self._userid, self._movieid, self._new_stars):
-            return True 
-        else:
-            return False
-
-    def _review_added(self):
-        print('Recenzja została poprawnie dodana do bazy.')
-
-    def _review_not_added(self):
-        print('Baza nie odpowiada, spróbuj później.')
+        return databaseS.add_new(self._userid, self._movieid, self._new_stars)
 
     def _remove_added_review(self):
         databaseR = DatabaseReviews()

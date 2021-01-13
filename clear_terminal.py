@@ -1,8 +1,9 @@
 """Moduł czyszczący terminal."""
-from os import system, name
+from os import system, name, environ
 from time import sleep 
 
-def _clear_terminal(): 
+def _clear_terminal():
+    """Czyści terminal na Windows lub Unix/Mac."""
     if name == 'nt': #windows
         _ = system('cls') 
     else: #unix, mac

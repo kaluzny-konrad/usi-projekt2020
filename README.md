@@ -14,3 +14,4 @@ Np: Jeżeli opinia będzie brzmieć "Very good movie" a ocena będzie wynosić '
 [X] Wykorzystanie głównej bazy
 [X] Naprawić wyświetlanie filmów, przy niezalogowanym userze
 [X] Aktywować funkcję predykcji
+

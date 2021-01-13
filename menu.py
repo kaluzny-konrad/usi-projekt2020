@@ -20,7 +20,7 @@ class Menu:
         }
 
     def run(self):
-        """Wyświetl opcje wyboru i odpowiedz na wybór."""
+        """Wyświetl opcje wyboru i odpowiedź na wybór."""
         try:
             while True:
                 self.display_menu()
@@ -48,12 +48,14 @@ class Menu:
         print("0. Wyjdź z programu.")
 
     def login_logout(self):
+        """Przekierowanie użytkownika do logowania lub wylogowywania z portalu."""
         if self.user._is_logged == True:
             self.user.logout()
         else:
             self.user.login()
 
     def film_list(self):
+        """Wyświetlanie listy filmów i poruszanie się po liście."""
         rows_in_list = settings.rows_in_list_movies
         first_row = 0
         last_row = first_row + rows_in_list
@@ -83,14 +85,15 @@ class Menu:
                 self.movie.show_choosen_movie()
                 if self.user._is_logged == True:
                     self.user_review()
-                self.wait_for_exit()
+                else:
+                    self.wait_for_exit()
                 self.movie._movie_selected = False
             else:
                 print('\nPodano błędną informację.')
                 clear_terminal.clear(2)
 
     def user_review(self):
-        """Sprawdzenie, czy użytkownik dodał już opinię do filmu."""
+        """Wyświetla recenzję z opcją usunięcia, lub wyświetla opcję dodania opinii."""
         self.revs = Reviews(self.user, self.movie)
         if self.revs.review_exists():
             self.revs.get_review()
@@ -100,19 +103,20 @@ class Menu:
 
     def user_review_ask_for_delete(self):
         """Pozwala usunąć opinię użytkownikowi."""
-        choice = input("Chcesz usunąć opinię? [t]ak/[n]ie: ")
-        if choice == 'n' or choice == 'N':
-            pass
-        elif choice == 't' or choice == 'T':
+        if self._user_wrote_t("Chcesz usunąć opinię? [t]ak lub [p]owróć do listy filmów: "):
             self.revs.drop()
 
     def user_review_ask_for_add(self):
         """Pozwala dodać opinię użytkownikowi."""
-        choice = input("Chcesz dodać opinię? [t]ak/[n]ie: ")
-        if choice == 'n' or choice == 'N':
-            pass
-        elif choice == 't' or choice == 'T':
+        if self._user_wrote_t("Chcesz dodać opinię? [t]ak lub [p]owróć do listy filmów: "):
             self.revs.add(self.model)
+
+    def _user_wrote_t(self, question):
+        """Zwraca True, jeżeli użytkownik wcisnął literę t w odpowiedzi na pytanie."""
+        choice = input(question)
+        if choice == 't' or choice == 'T':
+            return True
+        return False
     
     def wait_for_exit(self):
         """Oczekuje na wyjście usera z danej karty."""

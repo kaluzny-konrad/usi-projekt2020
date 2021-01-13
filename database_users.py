@@ -24,6 +24,7 @@ class DatabaseUsers(Database):
             return self._database.loc[value].values[1]
 
     def is_correct_login_data(self, username, password):
+        """Zwraca True, jeżeli dane logowania podane przez użytkownika są poprawne."""
         if self._get_database():
             try:
                 if self._get_password(username) == password:
@@ -36,11 +37,13 @@ class DatabaseUsers(Database):
             print("Baza nie odpowiada, spróbuj później!")
 
     def _get_password(self, username):
+        """Pobiera hasło użytkownika z bazy."""
         if self._get_database():
             return self._database.loc[
                 self._database['login'] == username]['password'].values[0]
 
     def get_id_from_username(self, username):
+        """Pobiera id użytkownika o podanym username."""
         if self._get_database():
             try:
                 userid = self._database.loc[self._database['login'] 
