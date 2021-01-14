@@ -1,8 +1,10 @@
 ## Opis projektu:
+Opisy filmów pobierane są z oryginalnej strony IMDB.
 Program pozwala na dodanie recenzji do filmu z bazy IMDB.
-Program sprawdzi czy treść jest powiązana z oceną i poinformuje o wyniku użytkownika.
 
-Np: Jeżeli opinia będzie brzmieć "Very good movie" a ocena będzie wynosić '1', to użytkownik zostanie ostrzeżony, że prawdopodobnie pomylił się przy wstawianiu ilości wiazdek.
+Program sprawdzi czy treść jest powiązana z oceną i poinformuje o wyniku użytkownika.
+Np: Jeżeli opinia będzie brzmieć "Very good movie" a ocena będzie wynosić '1',
+to użytkownik zostanie ostrzeżony, że prawdopodobnie pomylił się przy wstawianiu ilości wiazdek.
 
 ## Lista zadań do wykonania:
 [X] Naprawienie zapisywania nowych recenzji
